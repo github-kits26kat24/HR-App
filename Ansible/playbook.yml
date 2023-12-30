@@ -1,0 +1,59 @@
+---
+- hosts: hrapp
+  become: true
+  become_method: sudo
+  vars: 
+    AWS_ACCESS_KEY_ID: 
+    POSTGRES_HOST: 
+    POSTGRES_PASSWORD: 
+    AWS_SECRET_ACCESS_KEY: 
+
+  tasks:
+
+    - name: Install git
+      yum:
+        name: git
+        state: present
+        update_cache: yes
+
+    - name: install docker
+      yum:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+       # - ca-certificates
+        - docker   
+
+    - name: start and enable docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Add docker user to a super user
+      command: usermod -aG docker $USER
+
+    - name: restart docker
+      service: 
+        name: docker 
+        state: restarted
+ 
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker 
+
+    - name: docker pull
+      ansible.builtin.command: docker pull mzmarci/hrapp:v3
+
+    - name: list content of working directory
+      ansible.builtin.command: pwd && ls
+
+
+    - name:  echo docker command 
+      ansible.builtin.command: echo "docker run -d -p 80:5000 -e POSTGRES_HOST={{POSTGRES_HOST}} -e POSTGRES_USER=hr_project -e POSTGRES_PASSWORD={{POSTGRES_PASSWORD}} -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=kay.tijani@gmail.com  -e SOURCE_ADDRESS=k.tijani0@hotmail.com -e AWS_REGION_NAME=eu-west-1 -e AWS_ACCESS_KEY_ID={{AWS_ACCESS_KEY_ID}} -e AWS_SECRET_ACCESS_KEY={{AWS_SECRET_ACCESS_KEY}} kitskat/hr-app:v3
+
+    - name: running HRAPP docker instance
+      ansible.builtin.command: docker run -d -p 80:5000 -e POSTGRES_HOST=hr-app-project.cku7q07sw3mp.eu-west-1.rds.amazonaws.com -e POSTGRES_USER=kitskatrds -e POSTGRES_PASSWORD="{{POSTGRES_PASSWORD}}" -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=kay.tijani@gmail.com  -e SOURCE_ADDRESS=k.tijani0@hotmail.com -e AWS_REGION_NAME="eu-west-1" -e AWS_ACCESS_KEY_ID="{{AWS_ACCESS_KEY_ID}}" -e AWS_SECRET_ACCESS_KEY="{{AWS_SECRET_ACCESS_KEY}}" kitskat/hr-app:v3
+      #ansible.builtin.command: docker run -d -p 80:5000 -e POSTGRES_HOST=project.cuzbrlyt8tuq.eu-west-1.rds.amazonaws.com -e POSTGRES_USER=hr_project -e POSTGRES_PASSWORD="{{POSTGRES_PASSWORD}}" -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=mzmazy100@gmail.com  -e SOURCE_ADDRESS=mzmazy100@gmail.com -e AWS_REGION_NAME="eu-west-1" -e AWS_KEY_NAME="{{AWS_KEY_NAME}}" -e AWS_ACCESS_NAME="{{AWS_ACCESS_NAME}}" test1:latest
