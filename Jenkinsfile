@@ -52,18 +52,18 @@ pipeline {
        }
            
     
-    //    stage ("Run ansible") {
-    //      steps {
-    //         sh '''
-    //              cd hr-app
-    //              cd Ansible
-    //              pwd 
-    //              ls
-    //              ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory --key-file $keyfile playbook.yml -u ec2-user
-    //              ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory  --key-file $keyfile playbookA.yml -u ec2-user 
-    //            '''
-    //      }
-    //    }
+       stage ("Run ansible") {
+         steps {
+            sh '''
+                 cd hr-app
+                 cd Ansible
+                 pwd 
+                 ls
+                 ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory --key-file $keyfile playbook.yml -u ec2-user
+                 ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory  --key-file $keyfile playbookA.yml -u ec2-user 
+               '''
+         }
+       }
 
     }
 
