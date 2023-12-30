@@ -28,7 +28,7 @@ pipeline {
          steps {
             sh '''
                   cd hr-app
-                  docker build -t kitskat/hr-app:$version .
+                  docker build -t kitskat/hr-app:v3 .
                '''   
          }
        }
@@ -37,7 +37,7 @@ pipeline {
          steps {
             sh '''
                   docker login -u $myuser -p $mypassword
-                  docker push kitskat/hr-app:$version
+                  docker push kitskat/hr-app:v3
                 '''
          }
        }       
@@ -46,7 +46,7 @@ pipeline {
          steps {
             sh '''
                ls
-                # docker run --name kitskat-1  --rm -d -p 80:5000 kitskat/hr-app:$version
+                # docker run --name kitskat-1  --rm -d -p 80:5000 kitskat/hr-app:v3
                '''
          }
        }
