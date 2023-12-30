@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: Nodes
   become: true
   become_method: sudo
   vars: 
