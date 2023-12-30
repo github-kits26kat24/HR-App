@@ -1,12 +1,12 @@
 ---
-- hosts: hrapp
+- hosts: all
   become: true
   become_method: sudo
   vars: 
-    AWS_ACCESS_KEY_ID: 
+    AWS_ACCESS_KEY_ID:
     POSTGRES_HOST: 
     POSTGRES_PASSWORD: 
-    AWS_SECRET_ACCESS_KEY: 
+    AWS_SECRET_ACCESS_KEY:
 
   tasks:
 
