@@ -41,17 +41,7 @@ pipeline {
                 '''
          }
        }       
-    
-       stage ("Build image") {
-         steps {
-            sh '''
-               ls
-                # docker run --name kitskat-1  --rm -d -p 80:5000 kitskat/hr-app:v3
-               '''
-         }
-       }
            
-    
        stage ("Run ansible") {
          steps {
             sh '''
