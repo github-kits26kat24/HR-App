@@ -4,7 +4,8 @@
   become_method: sudo
   vars: 
     AWS_ACCESS_KEY_ID:
-    POSTGRES_HOST: 
+    POSTGRES_HOST:
+    POSTGRES_NAME: 
     POSTGRES_PASSWORD: 
     AWS_SECRET_ACCESS_KEY:
 
