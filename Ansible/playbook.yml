@@ -45,7 +45,7 @@
         name: docker 
 
     - name: docker pull
-      ansible.builtin.command: docker pull mzmarci/hrapp:v3
+      ansible.builtin.command: docker pull kitskat/hr-app:v3
 
     - name: list content of working directory
       ansible.builtin.command: pwd && ls
