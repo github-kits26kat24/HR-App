@@ -1,5 +1,5 @@
 ---
-- hosts: Monitoring-Machine
+- hosts: monitoring-machine
   become: yes
   become_user: root
   become_method: sudo
@@ -13,21 +13,21 @@
   roles:
     - prometheus_node_exporter
 
-- hosts: Monitoring-Machine
+- hosts: monitoring-machine
   become: yes
   become_user: root
   become_method: sudo
   roles:
     - prometheus_node_exporter    
 
-- hosts: Monitoring-Machine
+- hosts: monitoring-machine
   become: yes
   become_user: root
   become_method: sudo
   roles:
     - prometheus
 
-- hosts: Monitoring-Machine
+- hosts: monitoring-machine
   become: yes
   become_user: root
   become_method: sudo
