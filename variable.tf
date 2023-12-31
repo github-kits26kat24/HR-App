@@ -14,7 +14,7 @@ variable "ec2_instance_type" {
 variable "ec2_key_name" {
   description = "This is a variable to manage ec2 key name"
   type        = string
-  default     = "Kitskat2023"
+  default     = "Kitskat202386"
 }
 
 variable "sg_name" {
