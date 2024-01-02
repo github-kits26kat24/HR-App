@@ -24,8 +24,14 @@
   become: yes
   become_user: root
   become_method: sudo
-  roles:
-    - prometheus
+  tasks:
+    - name: Debug node_exporter variable
+      debug:
+        var: node_exporter
+
+    - name: Include prometheus role
+      include_role:
+        name: prometheus
 
 - hosts: monitoring
   become: yes
@@ -33,12 +39,3 @@
   become_method: sudo
   roles:
     - grafana
-
-- hosts: monitoring
-  become: yes
-  become_user: root
-  become_method: sudo
-  tasks:
-    - name: Debug node_exporter variable
-      debug:
-        var: node_exporter
