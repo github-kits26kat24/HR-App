@@ -67,7 +67,6 @@
       shell: yum-config-manager --enable extras
 
     - name: Enable Some packages from amazon-linux-extras packages
-    service:
       shell: amazon-linux-extras enable python3.8 ansible2 docker
 
     - name: clean yum metadata cache
