@@ -38,9 +38,6 @@
       service: 
         name: docker 
         state: restarted
- 
-    - name: Upgrade pip3
-      shell: "python3.8 -m pip install pip --upgrade"
 
     - name: Ensure Python pip packages are installed
       pip:
