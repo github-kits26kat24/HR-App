@@ -1,5 +1,5 @@
 ---
-- hosts: monitoring-machine
+- hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
@@ -13,7 +13,7 @@
   roles:
     - prometheus_node_exporter
 
-- hosts: monitoring-machine
+- hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
@@ -21,7 +21,7 @@
     - prometheus_node_exporter    
 
 - name: Prometheus Installation
-  hosts: monitoring-machine  # <-- Specify your target host or group here
+  hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
