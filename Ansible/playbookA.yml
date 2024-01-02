@@ -20,10 +20,6 @@
   roles:
     - prometheus_node_exporter
 
-- name: Debug node_exporter variable
-  debug:
-    var: node_exporter
-
 - hosts: monitoring
   become: yes
   become_user: root
@@ -38,3 +34,6 @@
   roles:
     - grafana
 
+- name: Debug node_exporter variable
+  debug:
+    var: node_exporter
