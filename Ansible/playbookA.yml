@@ -27,16 +27,8 @@
   roles:
     - prometheus
 
-# - name: Install Grafana
-#   become: true
-#   yum:
-#     name: grafana-enterprise
-#     state: present
-
 - hosts: monitoring-machine
-- name: Import Grafana GPG key
   become: yes
-  command: rpm --import https://packages.grafana.com/gpg.key
   become_user: root
   become_method: sudo
   roles:
