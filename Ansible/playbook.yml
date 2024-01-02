@@ -52,13 +52,13 @@
 
     - name: Ensure a list of yum packages are installed
       yum:
-        name: "{{ packages }}"
-        state: latest
-        update_cache: yes
-        vars:
-          packages:
-         - python3.8
-         - ansible
+       name: "{{ packages }}"
+       state: latest
+       update_cache: yes
+      vars:
+         packages:
+        - python3.8
+        - ansible
 
     - name: clean yum metadata cache
       command: yum clean metadata
