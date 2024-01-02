@@ -27,12 +27,12 @@
   roles:
     - prometheus
 
-- hosts: monitoring-machine
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - grafana
+# - hosts: monitoring-machine
+#   become: yes
+#   become_user: root
+#   become_method: sudo
+#   roles:
+#     - grafana
 
 - hosts: monitoring-machine
   become: yes
