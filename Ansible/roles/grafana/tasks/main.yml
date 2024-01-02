@@ -3,6 +3,10 @@
     name: https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.0-1.x86_64.rpm
     state: latest
 
+- name: Import Grafana GPG key
+  become: yes
+  command: rpm --import https://packages.grafana.com/gpg.key
+
 - name: "Grafana configuration file copy"
   template:
     src: "grafana.conf.j2"
