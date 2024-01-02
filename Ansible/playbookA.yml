@@ -43,7 +43,7 @@
 #   roles:
 #     - grafana
 
-- hosts: monitoring-machine
+- hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
