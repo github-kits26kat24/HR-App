@@ -111,8 +111,8 @@
       ansible.builtin.command: pwd && ls
 
    - name: Echo docker command
-      ansible.builtin.shell: 
-      cmd: echo "docker run -d -p 80:5000 -e POSTGRES_HOST={{ POSTGRES_HOST }} -e POSTGRES_USER=kitskatrds -e POSTGRES_PASSWORD={{ POSTGRES_PASSWORD }} -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=kay.tijani@gmail.com -e SOURCE_ADDRESS=k.tijani0@hotmail.com -e AWS_REGION_NAME=eu-west-1 -e AWS_ACCESS_KEY_ID={{ AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY={{ AWS_SECRET_ACCESS_KEY }} kitskat/hr-app:v3"
+     shell: >
+       echo "docker run -d -p 80:5000 -e POSTGRES_HOST={{ POSTGRES_HOST }} -e POSTGRES_USER=kitskatrds -e POSTGRES_PASSWORD={{ POSTGRES_PASSWORD }} -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=kay.tijani@gmail.com -e SOURCE_ADDRESS=k.tijani0@hotmail.com -e AWS_REGION_NAME=eu-west-1 -e AWS_ACCESS_KEY_ID={{ AWS_ACCESS_KEY_ID }} -e AWS_SECRET_ACCESS_KEY={{ AWS_SECRET_ACCESS_KEY }} kitskat/hr-app:v3"
 
    - name: running HRAPP docker instance
       ansible.builtin.command: docker run -d -p 80:5000 -e POSTGRES_HOST=hr-app-project.cku7q07sw3mp.eu-west-1.rds.amazonaws.com -e POSTGRES_USER=kitskatrds -e POSTGRES_PASSWORD="{{POSTGRES_PASSWORD}}" -e POSTGRES_DATABASE_NAME=postgres -e TO_ADDRESS=kay.tijani@gmail.com  -e SOURCE_ADDRESS=k.tijani0@hotmail.com -e AWS_REGION_NAME="eu-west-1" -e AWS_ACCESS_KEY_ID="{{AWS_ACCESS_KEY_ID}}" -e AWS_SECRET_ACCESS_KEY="{{AWS_SECRET_ACCESS_KEY}}" kitskat/hr-app:v3
