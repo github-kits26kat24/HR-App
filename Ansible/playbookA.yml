@@ -34,6 +34,11 @@
   roles:
     - grafana
 
-- name: Debug node_exporter variable
-  debug:
-    var: node_exporter
+- hosts: monitoring
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+    - name: Debug node_exporter variable
+      debug:
+        var: node_exporter
