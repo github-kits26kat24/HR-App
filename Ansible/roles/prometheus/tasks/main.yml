@@ -64,7 +64,7 @@
     dest: /etc/systemd/system/prometheus.service
   notify: systemd_reload
 
-- name: Start prometheus service
+- name: Start prometheus service now
   service:
     name: prometheus
     state: started
