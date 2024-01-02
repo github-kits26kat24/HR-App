@@ -103,14 +103,7 @@
         - boto
         - boto3
         - docker-compose
-
-    - name: docker pull
-      community.general.command: docker pull kitskat/hr-app:v3
-
-    - name: list content of working directory
-      community.general.command: "pwd && ls"
-
-
+        
     - name: docker pull
       ansible.builtin.command: docker pull kitskat/hr-app:v3
 
