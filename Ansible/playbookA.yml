@@ -18,7 +18,7 @@
   become_user: root
   become_method: sudo
   roles:
-    - prometheus_node_exporter    
+    - prometheus_node_exporter
 
 - hosts: monitoring
   become: yes
@@ -26,28 +26,10 @@
   become_method: sudo
   roles:
     - prometheus
-    
-# - name: Prometheus Installation
-#   hosts: monitoring
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - prometheus
-
-# - hosts: monitoring-machine
-#   become: yes
-#   become_user: root
-#   become_method: sudo
-#   roles:
-#     - grafana
 
 - hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
-- name: Install Grafana
-  vars:
-    grafana_release_tag: "4.6.3"
   roles:
-    - { role: ansible-grafana }
+    - grafana
