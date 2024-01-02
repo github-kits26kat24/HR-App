@@ -6,7 +6,7 @@
   roles:
     - alertmanager
 
-- hosts: monitoring-machine
+- hosts: nodes
   become: yes
   become_user: root
   become_method: sudo
