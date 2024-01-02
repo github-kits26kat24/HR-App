@@ -11,14 +11,15 @@
   become_user: root
   become_method: sudo
   roles:
-    - prometheus_node_exporter
+    - node_exporter
+#    - prometheus_node_exporter
 
 - hosts: monitoring
   become: yes
   become_user: root
   become_method: sudo
   roles:
-    - prometheus_node_exporter
+    - node_exporter
 
 - hosts: monitoring
   become: yes
