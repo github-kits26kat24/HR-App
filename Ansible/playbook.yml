@@ -103,15 +103,6 @@
         - boto
         - boto3
         - docker-compose
----
-- hosts: nodes
-  become: true
-  become_method: sudo
-  vars: 
-    # Define your variables here with actual values
-
-  tasks:
-    # ... Existing tasks ...
 
     - name: docker pull
       community.general.command: docker pull kitskat/hr-app:v3
