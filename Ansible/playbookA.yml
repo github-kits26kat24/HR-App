@@ -5,13 +5,6 @@
   become_method: sudo
   roles:
     - alertmanager
-  
-- hosts: monitoring
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - prometheus
 
 - hosts: nodes
   become: yes
@@ -27,6 +20,13 @@
   roles:
     - prometheus_node_exporter    
 
+- hosts: monitoring
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus
+    
 # - name: Prometheus Installation
 #   hosts: monitoring
 #   become: yes
