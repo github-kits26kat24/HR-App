@@ -1,2 +1,7 @@
 ---
+- hosts: nodes
+  become: true
+  become_method: sudo
+  roles:
+    - ansible-docker_compose
 - include: docker_compose_install.yml
