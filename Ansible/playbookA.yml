@@ -20,21 +20,21 @@
   roles:
     - prometheus_node_exporter    
 
-- name: Prometheus Installation
-  hosts: monitoring
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - prometheus
-
-
-# - hosts: monitoring-machine
+# - name: Prometheus Installation
+#   hosts: monitoring
 #   become: yes
 #   become_user: root
 #   become_method: sudo
 #   roles:
 #     - prometheus
+
+
+- hosts: monitoring
+  become: yes
+  become_user: root
+  become_method: sudo
+  roles:
+    - prometheus
 
 # - hosts: monitoring-machine
 #   become: yes
