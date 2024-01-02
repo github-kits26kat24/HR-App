@@ -48,9 +48,7 @@
        # - ca-certificates
         - pip
         - python-pip
-        - python3.8
         - ansible
-        - docker-compose
 
     - name: Install Docker Module for Python
       pip:
