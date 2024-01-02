@@ -50,9 +50,9 @@
         - python-pip
         - ansible
 
-    - name: Install Docker Module for Python
-      pip:
-        name: docker 
+    # - name: Install Docker Module for Python
+    #   pip:
+    #     name: docker 
 
     - name: docker pull
       ansible.builtin.command: docker pull kitskat/hr-app:v3
