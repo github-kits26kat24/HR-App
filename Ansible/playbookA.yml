@@ -45,10 +45,14 @@
       become: yes
       become_user: root
       become_method: sudo
-      shell: rpm --import https://packages.grafana.com/gpg.key
+      yum_key:
+        state: present
+        key: https://packages.grafana.com/gpg.key
 
     - name: Install Grafana
       become: yes
       become_user: root
       become_method: sudo
-      shell: yum install -y https://packages.grafana.com/enterprise/rpm/grafana-enterprise-10.2.3-1.x86_64.rpm
+      yum:
+        name: https://packages.grafana.com/enterprise/rpm/grafana-enterprise-10.2.3-1.x86_64.rpm
+        state: present
