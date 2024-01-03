@@ -1,13 +1,4 @@
-- name: Install gpg key
-  yum:
-    name: sudo rpm --import https://packages.grafana.com/gpg.key
-    state: latest
-
-- name: update yum catch
-  yum:
-    name: makecache
-    state: latest
-
+---
 - name: Install grafana
   yum:
     name: https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3-1.x86_64.rpm

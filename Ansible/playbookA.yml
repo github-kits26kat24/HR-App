@@ -39,3 +39,9 @@
   become_method: sudo
   roles:
     - grafana
+
+- name: Install Grafana GPG key
+  become: yes
+  become_user: root
+  become_method: sudo
+  shell: rpm --import https://packages.grafana.com/gpg.key
