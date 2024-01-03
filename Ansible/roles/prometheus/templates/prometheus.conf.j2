@@ -6,6 +6,7 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9090']
+
   - job_name: 'node_exporter'
     scrape_interval: 5s
     static_configs:
@@ -15,6 +16,12 @@ scrape_configs:
         - '{{ host }}:9100'
       {% endif %}
       {% endfor %}
+
+  - job_name: 'nodes'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['18.202.30.34:9100']
+      - targets: ['52.209.210.120:9100']
 
 rule_files:
   - alert.rules.yml
