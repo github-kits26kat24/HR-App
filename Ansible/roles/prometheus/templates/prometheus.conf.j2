@@ -6,16 +6,11 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9090']
-
+      
   - job_name: 'node_exporter'
     scrape_interval: 5s
     static_configs:
-      - targets:
-      {% for host in groups['node_exporter'] %}
-      {% if inventory_hostname != host %}
-        - '{{ host }}:9100'
-      {% endif %}
-      {% endfor %}
+      - targets: ['localhost:9100']
 
   - job_name: 'nodes'
     scrape_interval: 5s
@@ -23,15 +18,13 @@ scrape_configs:
       - targets: ['18.202.30.34:9100']
       - targets: ['52.209.210.120:9100']
 
+
 rule_files:
   - alert.rules.yml
 
 alerting:
   alertmanagers:
   - static_configs:
-    - targets:
-    {% for host in groups['alertmanager'] %}
-    {% if inventory_hostname != host %}
-      - '{{ host }}:9093'
-    {% endif %}
-    {% endfor %}
+    - targets: ['localhost:9093']
+
+
