@@ -57,5 +57,3 @@
         name: https://packages.grafana.com/enterprise/rpm/grafana-enterprise-10.2.3-1.x86_64.rpm
         state: present
 
-  ansible-galaxy collection install community.general
-
