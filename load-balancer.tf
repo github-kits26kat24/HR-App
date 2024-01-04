@@ -33,7 +33,7 @@ resource "aws_lb_target_group_attachment" "node-one" {
 }
 resource "aws_lb_target_group_attachment" "node-two" {
   target_group_arn = aws_lb_target_group.hr-app.arn
-  target_id        = aws_instance.Node-One.id
+  target_id        = aws_instance.Node-Two.id
   port             = 80
 }
 
