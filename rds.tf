@@ -1,36 +1,30 @@
-# resource "aws_db_subnet_group" "hr-app" {
-#   name        = "hr-app"
-#   description = "RDS subnet group"
-#   subnet_ids  = [aws_subnet.Node-One.id, aws_subnet.Node-Two.id]
-# }
-# resource "aws_db_parameter_group" "hr-app-pg" {
-#   name   = "hr-app-parameter"
-#   family = "mariadb10.3"
+# create the subnet group for the rds instance
+resource "aws_db_subnet_group" "hr-subnet_group" {
+  name        = "hr-database_subnets"
+  subnet_ids  = [aws_subnet.Node-One.id, aws_subnet.Node-Two.id, aws_subnet.Monitoring-Machine.id]
+  description = "subnet for database instance"
+  tags = {
+    Name = "hr-database"
+  }
+}
 
-#   parameter {
-#     name  = "max_allowed_packet"
-#     value = "16777216"
-#   }
-# }
-# resource "aws_db_instance" "mariadb" {
-#   allocated_storage      = 5 # 100 GB of storage, gives us more IOPS than a lower number
-#   engine                 = "mariadb"
-#   engine_version         = "10.3"
-#   instance_class         = "db.t2.micro" # use micro if you want to use the free tier
-#   identifier             = "mariadb"
-#   db_name                = "mydatabase"  # database name
-#   username               = "kits-hr-app" # var.RDS_USERNAME # username
-#   password               = "hrapprds"    # var.RDS_PASSWORD # password
-#   db_subnet_group_name   = aws_db_subnet_group.hr-app.name
-#   parameter_group_name   = aws_db_parameter_group.hr-app-pg.name
-#   multi_az               = "false" # set to true to have high availability: 2 instances synchronized with each other
-#   vpc_security_group_ids = [aws_security_group.hr-app-sg.id]
-#   storage_type           = "gp2" # ?
-#   #backup_retention_period   = 30                                          # how long you’re going to keep your backups
-#   # availability_zone         = [aws_subnet.private.availability_zone] # prefered AZ
-#   final_snapshot_identifier = "mariadb-final-snapshot" # final snapshot when executing terraform destroy
-#   skip_final_snapshot       = "false"                  # false If you want a snapshot of the RDS instance before it gets destroyed and recreated
-#   tags = {
-#     Name = "hr-app-engine"
-#   }
-# }
+# use data source to get all available zones in the region
+data "aws_availability_zones" "available_zones" {}
+
+# create the rds instance
+resource "aws_db_instance" "hr-app-db_instance" {
+  engine                 = "postgres"
+  engine_version         = "15.3"
+  multi_az               = false
+  identifier             = "hr-app-project"
+  username               = "kitskatrds"
+  password               = "kitskat2023"
+  instance_class         = "db.t3.micro"
+  allocated_storage      = 400
+  db_subnet_group_name   = aws_db_subnet_group.hr-subnet_group.name
+  vpc_security_group_ids = [aws_security_group.hr-sg.id]
+  availability_zone      = data.aws_availability_zones.available_zones.names[0]
+  db_name                = "mydatabase"
+  publicly_accessible    = true
+  skip_final_snapshot    = true
+}

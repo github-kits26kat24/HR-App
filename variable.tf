@@ -20,7 +20,7 @@ variable "ec2_key_name" {
 variable "sg_name" {
   description = "This is a variable to manage ec2 key name"
   type        = string
-  default     = "hr-app-sg"
+  default     = "hr-sg"
 }
 
 variable "subnet" {

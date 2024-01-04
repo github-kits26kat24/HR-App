@@ -1,14 +1,14 @@
-resource "aws_route_table" "hr-app-rt" {
+resource "aws_route_table" "hr-rt" {
   vpc_id = aws_vpc.hr-app.id
 
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.hr-app-gw.id
+    gateway_id = aws_internet_gateway.hr-gw.id
   }
 
   tags = {
-    Name = "hr-app-rt"
+    Name = "hr-rt"
 
   }
 }
