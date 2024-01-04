@@ -90,13 +90,13 @@ variable "dev_default_tags_3" {
 variable "bucket" {
   description = "This is a variable to manage ec2 bucket name"
   type        = string
-  default     = "hr-app-project-bucket"
+  default     = "hr.bucket"
 }
 
 variable "key" {
   description = "This is a variable to manage ec2 bucket name"
   type        = string
-  default     = "dev/terraform.tfstate"
+  default     = "hr/terraform.tfstate"
 }
 
 variable "RDS_PASSWORD" {

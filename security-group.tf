@@ -26,6 +26,14 @@ resource "aws_security_group" "hr-sg" {
   }
 
   ingress {
+    description = "HTTPS from VPC"
+    from_port   = 443 //Http always connect from port 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     description = "HTTP from VPC"
     from_port   = 3306 //Http always connect from port 80
     to_port     = 3306
