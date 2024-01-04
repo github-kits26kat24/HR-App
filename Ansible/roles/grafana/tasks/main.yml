@@ -1,10 +1,17 @@
+# - name: Install Grafana GPG key
+#   become: yes
+#   become_user: root
+#   become_method: sudo
+#   yum_key:
+#     state: present
+#     key: https://packages.grafana.com/gpg.key
+---
 - name: Install Grafana GPG key
   become: yes
   become_user: root
   become_method: sudo
-  yum_key:
-    state: present
-    key: https://packages.grafana.com/gpg.key
+  shell: rpm --import https://packages.grafana.com/gpg.key
+
 
 - name: Install Grafana
   yum:
