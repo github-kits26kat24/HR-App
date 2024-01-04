@@ -23,6 +23,18 @@ scrape_configs:
       - targets: ['18.200.247.196:9100']
       - targets: ['34.241.91.37:9100']
 
+  - job_name: 'nodes_prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['18.200.247.196:9090']
+      - targets: ['34.241.91.37:9090']
+
+  - job_name: 'nodes_grafana'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['18.200.247.196:3000']
+      - targets: ['34.241.91.37:3000']
+
 rule_files:
   - alert.rules.yml
 
@@ -30,3 +42,9 @@ alerting:
   alertmanagers:
     - static_configs:
         - targets: ['localhost:9093']
+
+- job_name: 'nodes_grafana'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['18.200.247.196:9093']
+      - targets: ['34.241.91.37:9093']
