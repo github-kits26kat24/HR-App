@@ -40,19 +40,22 @@
   roles:
     - grafana
 
-  # tasks:
-  #   - name: Install Grafana GPG key
-  #     become: yes
-  #     become_user: root
-  #     become_method: sudo
-  #     yum_key:
-  #       state: present
-  #       key: https://packages.grafana.com/gpg.key
+  tasks:
+    - name: Install Grafana GPG key
+      become: yes
+      become_user: root
+      become_method: sudo
+      yum_key:
+        state: present
+        key: https://packages.grafana.com/gpg.key
 
-  #   - name: Install Grafana
-  #     become: yes
-  #     become_user: root
-  #     become_method: sudo
-  #     yum:
-  #       name: https://packages.grafana.com/enterprise/rpm/grafana-enterprise-10.2.3-1.x86_64.rpm
-  #       state: present
+    - name: Install Grafana
+      become: yes
+      become_user: root
+      become_method: sudo
+      yum:
+        name: https://packages.grafana.com/enterprise/rpm/grafana-enterprise-10.2.3-1.x86_64.rpm
+        state: present
+
+  ansible-galaxy collection install community.general
+
