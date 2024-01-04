@@ -1,37 +1,23 @@
+---
 - name: Install Grafana
-  hosts: monitoring
-  become: true
-  tasks:
-    - name: Install Grafana package
-      yum:
-        name: https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3-1.x86_64.rpm
-        state: latest
+  yum:
+    name: https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3-1.x86_64.rpm
+    state: latest
 
 - name: Configure Grafana
-  hosts: monitoring
-  become: true
-  tasks:
-    - name: Copy Grafana configuration file
-      template:
-        src: "grafana.conf.j2"
-        dest: /etc/grafana/grafana.ini
-      notify: event_restart_grafana
+  template:
+    src: "grafana.conf.j2"
+    dest: /etc/grafana/grafana.ini
+  notify: event_restart_grafana
 
 - name: Start Grafana
-  hosts: monitoring
-  become: true
-  tasks:
-    - name: Start Grafana server
-      service:
-        name: grafana-server
-        enabled: true
-        state: started
+  service:
+    name: grafana-server
+    enabled: true
+    state: started
 
 - name: Check if Grafana is accessible
-  hosts: monitoring
-  tasks:
-    - name: Perform HTTP GET request to Grafana
-      uri:
-        url: http://127.0.0.1:3000
-        method: GET
-        status_code: 200
+  uri:
+    url: http://127.0.0.1:3000
+    method: GET
+    status_code: 200
