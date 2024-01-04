@@ -1,4 +1,12 @@
 ---
+- name: Install Grafana GPG key
+  become: yes
+  become_user: root
+  become_method: sudo
+  yum_key:
+    state: present
+    key: https://packages.grafana.com/gpg.key
+
 - name: Install Grafana
   yum:
     name: https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3-1.x86_64.rpm
@@ -21,3 +29,10 @@
     url: http://127.0.0.1:3000
     method: GET
     status_code: 200
+
+
+#     Standalone Linux Binaries(64 Bit)SHA256: c717f7eebb8369e1e7cd3fbb15d57a2a38f9594da5610a943f7d4b06e5ffcfa7
+# wget https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3.linux-amd64.tar.gz
+# tar -zxvf grafana-enterprise-10.2.3.linux-amd64.tar.gz
+# Red Hat, CentOS, RHEL, and Fedora(64 Bit)SHA256: 2ac1d53f3f907672a47762d4e87ab165079d300d7f0a560f5a2d253ca413bd4a
+# sudo yum install -y https://dl.grafana.com/enterprise/release/grafana-enterprise-10.2.3-1.x86_64.rpm
