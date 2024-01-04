@@ -40,7 +40,7 @@ resource "aws_security_group" "hr-sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-    ingress {
+  ingress {
     description = "Allow port 9090 inbound"
     from_port   = 9100
     to_port     = 9100
