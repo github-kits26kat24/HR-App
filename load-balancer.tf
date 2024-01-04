@@ -66,11 +66,10 @@ resource "aws_lb_listener" "hr-front_end" {
 
 
 # create a listener on port 80 with forward action
-resource "aws_lb_listener" "hr_http_listener-2" {
+resource "aws_lb_listener" "hr_http_listener-1" {
   load_balancer_arn = aws_lb.hr-load_balancer.arn
   port              = 80
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  protocol          = "HTTP"  # Use HTTP for non-secure traffic
 
   default_action {
     type             = "forward"
@@ -79,27 +78,17 @@ resource "aws_lb_listener" "hr_http_listener-2" {
 }
 
 # create a listener on port 443 with forward action
-resource "aws_lb_listener" "hr_https_listener-1" {
+
+resource "aws_lb_listener" "hr_https_listener-2" {
   load_balancer_arn = aws_lb.hr-load_balancer.arn
   port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  protocol          = "HTTPS" # Use HTTPS for secure traffic
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.hr.arn
   }
+
+  ssl_policy      = "ELBSecurityPolicy-2016-08"
+ #  certificate_arn = "your_ssl_certificate_arn"  # Replace with your SSL certificate ARN
 }
-
-# create a listener on port 80 with forward action
-# resource "aws_lb_listener" "hr_app_https_listener2" {
-#   load_balancer_arn = aws_lb.hr_app_load_balancer.arn
-#   port              = 80
-#   protocol          = "HTTPS"
-#   ssl_policy        = "ELBSecurityPolicy-2016-08"
-
-#   default_action {
-#     type             = "forward"
-#     target_group_arn = aws_lb_target_group.hr_app_target_group.arn
-#   }
-# }
