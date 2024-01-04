@@ -39,18 +39,18 @@ resource "aws_lb_target_group" "hr" {
 resource "aws_lb_target_group_attachment" "node-one" {
   target_group_arn = aws_lb_target_group.hr.arn
   target_id        = aws_instance.Node-One.id
-  port             = "80"
+  port             = 80
 }
 resource "aws_lb_target_group_attachment" "node-two" {
   target_group_arn = aws_lb_target_group.hr.arn
   target_id        = aws_instance.Node-Two.id
-  port             = "80"
+  port             = 80
 }
 
 # create a listener on port 80 with redirect action
 resource "aws_lb_listener" "hr-front_end" {
   load_balancer_arn =  aws_lb.hr-load_balancer.arn
-  port              = "80"
+  port              = 80
   protocol          = "HTTP"
 
   default_action {
@@ -66,7 +66,7 @@ resource "aws_lb_listener" "hr-front_end" {
 
 
 # create a listener on port 80 with forward action
-resource "aws_lb_listener" "hr-https_listener-2" {
+resource "aws_lb_listener" "hr_http_listener-2" {
   load_balancer_arn = aws_lb.hr-load_balancer.arn
   port              = 80
   protocol          = "HTTPS"
@@ -79,7 +79,7 @@ resource "aws_lb_listener" "hr-https_listener-2" {
 }
 
 # create a listener on port 443 with forward action
-resource "aws_lb_listener" "hr-https_listener-1" {
+resource "aws_lb_listener" "hr_https_listener-1" {
   load_balancer_arn = aws_lb.hr-load_balancer.arn
   port              = 443
   protocol          = "HTTPS"
@@ -90,3 +90,16 @@ resource "aws_lb_listener" "hr-https_listener-1" {
     target_group_arn = aws_lb_target_group.hr.arn
   }
 }
+
+# create a listener on port 80 with forward action
+# resource "aws_lb_listener" "hr_app_https_listener2" {
+#   load_balancer_arn = aws_lb.hr_app_load_balancer.arn
+#   port              = 80
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.hr_app_target_group.arn
+#   }
+# }
