@@ -1,5 +1,5 @@
 resource "aws_route_table" "hr-rt" {
-  vpc_id = aws_vpc.hr-app.id
+  vpc_id = aws_vpc.hr.id
 
 
   route {
