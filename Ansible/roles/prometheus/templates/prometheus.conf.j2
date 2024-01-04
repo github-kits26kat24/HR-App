@@ -7,47 +7,44 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'nodes'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['3.254.192.234:9090']
-      - targets: ['18.201.60.17:9090']
-      
   - job_name: 'node_exporter'
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:9100']
-
-  - job_name: 'nodes'
-    scrape_interval: 5s
-    static_configs:
-      - targets: ['3.254.192.234:9100']
-      - targets: ['18.201.60.17:9100']
 
   - job_name: 'grafana'
     scrape_interval: 5s
     static_configs:
       - targets: ['localhost:3000']
 
-  - job_name: 'nodes'
+  - job_name: 'nodes_prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['3.254.192.234:9090']
+      - targets: ['18.201.60.17:9090']
+
+  - job_name: 'nodes_node_exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['3.254.192.234:9100']
+      - targets: ['18.201.60.17:9100']
+
+  - job_name: 'nodes_grafana'
     scrape_interval: 5s
     static_configs:
       - targets: ['3.254.192.234:3000']
       - targets: ['18.201.60.17:3000']
-
 
 rule_files:
   - alert.rules.yml
 
 alerting:
   alertmanagers:
-  - static_configs:
-    - targets: ['localhost:9093']
+    - static_configs:
+        - targets: ['localhost:9093']
 
-  - job_name: 'nodes'
+  - job_name: 'nodes_alertmanager'
     scrape_interval: 5s
     static_configs:
       - targets: ['3.254.192.234:9093']
       - targets: ['18.201.60.17:9093']
-
-
