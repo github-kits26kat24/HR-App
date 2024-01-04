@@ -40,11 +40,4 @@
   roles:
     - grafana
 
-- hosts: monitoring
-  become: yes
-  become_user: root
-  become_method: sudo
-  roles:
-    - grafana
-
 
