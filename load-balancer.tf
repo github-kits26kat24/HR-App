@@ -20,7 +20,7 @@ resource "aws_lb_target_group" "hr" {
   protocol = "HTTP"
   vpc_id   = aws_vpc.hr.id
 
-    health_check {
+  health_check {
     enabled             = true
     interval            = 300
     path                = "/"
@@ -47,48 +47,45 @@ resource "aws_lb_target_group_attachment" "node-two" {
   port             = 80
 }
 
-# create a listener on port 80 with redirect action
-resource "aws_lb_listener" "hr-front_end" {
-  load_balancer_arn =  aws_lb.hr-load_balancer.arn
+# create a listener on port 80 with forward action
+resource "aws_lb_listener" "hr_http_listener2" {
+  load_balancer_arn = aws_lb.hr-load_balancer.arn
   port              = 80
   protocol          = "HTTP"
 
   default_action {
-    type = "redirect"
-
-    redirect {
-      port        = 443
-      protocol    = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-
-# create a listener on port 80 with forward action
-resource "aws_lb_listener" "hr_http_listener-1" {
-  load_balancer_arn = aws_lb.hr-load_balancer.arn
-  port              = 80
-  protocol          = "HTTP"  # Use HTTP for non-secure traffic
-
-  default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.hr.arn
   }
 }
 
-# create a listener on port 443 with forward action
+# # create a listener on port 80 with redirect action
+# resource "aws_lb_listener" "hr_http_listener" {
+#   load_balancer_arn = aws_lb.hr-load_balancer.arn
+#   port              = 80
+#   protocol          = "HTTP"
 
-resource "aws_lb_listener" "hr_https_listener-2" {
-  load_balancer_arn = aws_lb.hr-load_balancer.arn
-  port              = 443
-  protocol          = "HTTPS" # Use HTTPS for secure traffic
+#   default_action {
+#     type = "redirect"
 
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.hr.arn
-  }
+#     redirect {
+#       port        = 443
+#       protocol    = "HTTPS"
+#       status_code = "HTTP_301"
+#     }
+#   }
+# }
 
-  ssl_policy      = "ELBSecurityPolicy-2016-08"
- #  certificate_arn = "your_ssl_certificate_arn"  # Replace with your SSL certificate ARN
-}
+
+# # create a listener on port 443 with forward action
+# resource "aws_lb_listener" "hr_https_listener" {
+#   load_balancer_arn = aws_lb.hr-load_balancer.arn
+#   port              = 443
+#   protocol          = "HTTPS"
+#   ssl_policy        = "ELBSecurityPolicy-2016-08"
+
+#   default_action {
+#     type             = "forward"
+#     target_group_arn = aws_lb_target_group.hr.arn
+#   }
+# }
