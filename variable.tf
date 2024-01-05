@@ -65,6 +65,7 @@ variable "dev_default_tags_1" {
     "Name"        = "Node_One"
     "Dept"        = "Accounting-Node-One"
     "can destroy" = "yes"
+    "env" = "prod"
   }
 }
 
@@ -75,6 +76,7 @@ variable "dev_default_tags_2" {
     "Name"        = "Node_Two"
     "Dept"        = "Finance-Node-Two"
     "can destroy" = "yes"
+    "env" = "prod" 
   }
 }
 variable "dev_default_tags_3" {
@@ -84,6 +86,7 @@ variable "dev_default_tags_3" {
     "Name"        = "Monitoring-Machine"
     "Dept"        = "DataBase-Node-Three"
     "can destroy" = "yes"
+    "env" = "prod"
   }
 }
 
