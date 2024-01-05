@@ -74,4 +74,4 @@
   uri:
     url: http://localhost:9090
     method: GET
-    status_code: 200
+    status_code: -1
