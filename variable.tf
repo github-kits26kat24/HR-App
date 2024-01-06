@@ -26,13 +26,13 @@ variable "sg_name" {
 variable "subnet" {
   description = "This is a variable to manage ec2 key name"
   type        = list(any)
-  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.2.0/24"]
+  default     = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 }
 
 variable "availability_zone" {
   description = "This is a variable to manage ec2 key name"
   type        = list(any)
-  default     = ["eu-west-1a", "eu-west-1b", "eu-west-1b"]
+  default     = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
 }
 
 variable "availability_zones" {
@@ -65,7 +65,7 @@ variable "dev_default_tags_1" {
     "Name"        = "Node_One"
     "Dept"        = "Accounting-Node-One"
     "can destroy" = "yes"
-    "env" = "prod"
+    "env"         = "prod"
   }
 }
 
@@ -76,7 +76,7 @@ variable "dev_default_tags_2" {
     "Name"        = "Node_Two"
     "Dept"        = "Finance-Node-Two"
     "can destroy" = "yes"
-    "env" = "prod" 
+    "env"         = "prod"
   }
 }
 variable "dev_default_tags_3" {
@@ -86,7 +86,7 @@ variable "dev_default_tags_3" {
     "Name"        = "Monitoring-Machine"
     "Dept"        = "DataBase-Node-Three"
     "can destroy" = "yes"
-    "env" = "prod"
+    "env"         = "prod"
   }
 }
 

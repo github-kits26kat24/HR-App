@@ -1,24 +1,24 @@
-
 # create application load balancer
-resource "aws_lb" "hr-load_balancer" {
-  name               = "hr-Load-Balancer"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.hr-sg.id]
-  subnets            = [aws_subnet.Node-One.id, aws_subnet.Node-Two.id]
-
+resource "aws_lb" "hr_load_balancer" {
+  name                       = "hr"
+  internal                   = false
+  load_balancer_type         = "application"
+  security_groups            = [aws_security_group.hr-sg.id]
+  subnets                    = [aws_subnet.Node-One.id, aws_subnet.Node-Two.id]
   enable_deletion_protection = false
+
   tags = {
-    Environment = "hr"
+    Name = "hr"
   }
 }
 
 # create target group
 resource "aws_lb_target_group" "hr" {
-  name     = "HR-Load-Balancer-Taget-Group"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = aws_vpc.hr.id
+  name        = "hr-app-tg"
+  target_type = "ip"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.hr.id
 
   health_check {
     enabled             = true
@@ -36,32 +36,35 @@ resource "aws_lb_target_group" "hr" {
 }
 
 # create target group attachment
-resource "aws_lb_target_group_attachment" "node-one" {
+resource "aws_lb_target_group_attachment" "Node-One" {
   target_group_arn = aws_lb_target_group.hr.arn
-  target_id        = aws_instance.Node-One.id
-  port             = 80
-}
-resource "aws_lb_target_group_attachment" "node-two" {
-  target_group_arn = aws_lb_target_group.hr.arn
-  target_id        = aws_instance.Node-Two.id
+  target_id        = aws_instance.Node-One.private_ip
   port             = 80
 }
 
+resource "aws_lb_target_group_attachment" "Node-Two" {
+  target_group_arn = aws_lb_target_group.hr.arn
+  target_id        = aws_instance.Node-Two.private_ip
+  port             = 80
+}
+
+
 # create a listener on port 80 with forward action
-resource "aws_lb_listener" "hr_http_listener2" {
-  load_balancer_arn = aws_lb.hr-load_balancer.arn
-  port              = 80
+resource "aws_lb_listener" "hr-app" {
+  load_balancer_arn = aws_lb.hr_load_balancer.arn
+  port              = "80"
   protocol          = "HTTP"
 
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.hr.arn
+
   }
 }
 
 # # create a listener on port 80 with redirect action
 # resource "aws_lb_listener" "hr_http_listener" {
-#   load_balancer_arn = aws_lb.hr-load_balancer.arn
+#   load_balancer_arn = aws_lb.hr_load_balancer.arn
 #   port              = 80
 #   protocol          = "HTTP"
 
@@ -70,16 +73,15 @@ resource "aws_lb_listener" "hr_http_listener2" {
 
 #     redirect {
 #       port        = 443
-#       protocol    = "HTTPS"
+#       protocol    = "HTTP"
 #       status_code = "HTTP_301"
 #     }
 #   }
 # }
 
-
 # # create a listener on port 443 with forward action
 # resource "aws_lb_listener" "hr_https_listener" {
-#   load_balancer_arn = aws_lb.hr-load_balancer.arn
+#   load_balancer_arn = aws_lb.hr_load_balancer.arn
 #   port              = 443
 #   protocol          = "HTTPS"
 #   ssl_policy        = "ELBSecurityPolicy-2016-08"
