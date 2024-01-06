@@ -16,7 +16,7 @@ resource "aws_lb" "hr_load_balancer" {
 resource "aws_lb_target_group" "hr" {
   name        = "hr-app-tg"
   target_type = "ip"
-  port        = 80
+  port        = 9100
   protocol    = "HTTP"
   vpc_id      = aws_vpc.hr.id
 
@@ -39,20 +39,20 @@ resource "aws_lb_target_group" "hr" {
 resource "aws_lb_target_group_attachment" "Node-One" {
   target_group_arn = aws_lb_target_group.hr.arn
   target_id        = aws_instance.Node-One.private_ip
-  port             = 80
+  port             = 9100
 }
 
 resource "aws_lb_target_group_attachment" "Node-Two" {
   target_group_arn = aws_lb_target_group.hr.arn
   target_id        = aws_instance.Node-Two.private_ip
-  port             = 80
+  port             = 9100
 }
 
 
 # create a listener on port 80 with forward action
 resource "aws_lb_listener" "hr-app" {
   load_balancer_arn = aws_lb.hr_load_balancer.arn
-  port              = "80"
+  port              = "9100"
   protocol          = "HTTP"
 
   default_action {
