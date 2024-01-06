@@ -42,6 +42,15 @@ pipeline {
          }
        }       
            
+       stage ("Run image") {
+         steps {
+            sh '''
+               ls
+                # docker run --name hrapp  --rm -d -p 5000:5000 kitskat/hr-app:$version
+               '''
+         }
+       }
+
        stage ("Run ansible") {
          steps {
             sh '''
