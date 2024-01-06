@@ -39,17 +39,12 @@
         name: docker 
         state: restarted
 
-    - name: install some packages
-      yum:
-        name: "{{item}}"
-        state: latest
-        update_cache: yes
-      loop:
-       # - ca-certificates
-        - pip
-        - python-pip
-        - ansible
+    - name: Install Docker Module for Python
+      pip:
+        name: docker 
 
+    ##########
+    
     # - name: Install Docker Module for Python
     #   pip:
     #     name: docker 

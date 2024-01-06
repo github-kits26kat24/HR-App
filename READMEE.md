@@ -48,3 +48,15 @@ echo "# hr-app-project" >> README.md
 
 # [your-group]
 # your-ec2-instance-ip-address
+
+
+  <!-- - name: install some packages
+      yum:
+        name: "{{item}}"
+        state: latest
+        update_cache: yes
+      loop:
+       # - ca-certificates
+        - pip
+        - python-pip
+        - ansible -->
