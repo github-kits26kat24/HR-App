@@ -9,7 +9,7 @@ pipeline {
         POSTGRES_PASSWORD = credentials ('POSTGRES_PASSWORD')
         AWS_ACCESS_KEY_ID = credentials ('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials ('AWS_SECRET_ACCESS_KEY')
-        version = "v3"
+        version = "v4"
         keyfile = credentials ('keyfile')
 
     }
@@ -46,7 +46,7 @@ pipeline {
          steps {
             sh '''
                ls
-                # docker run --name hrapp  --rm -d -p 5000:5000 kitskat/hr-app:$version
+                # docker run --name hrapp  --rm -d -p 5000:5000 kitskat/hr-app:v4 
                '''
          }
        }
