@@ -31,7 +31,7 @@
         enabled: yes
 
     - name: Add docker user to a super user
-      command: usermod -aG docker $USER
+      command: usermod -aG docker "{{ ansible_user }}"
 
     - name: Restart Docker
       service:
