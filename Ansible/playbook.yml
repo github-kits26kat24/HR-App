@@ -42,8 +42,6 @@
       pip:
         name: docker
         state: present
-        executable: /usr/bin/python3.9
-        extra_args: "--ignore-installed"
 
     - name: Docker pull
       ansible.builtin.command: docker pull kitskat/hr-app:v4
