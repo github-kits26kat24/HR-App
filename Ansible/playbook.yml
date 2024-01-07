@@ -45,17 +45,13 @@
 
     ##########
 
-    - name: Create a virtual environment
-      command: /usr/bin/python3.9 -m venv /path/to/venv
-
-    - name: Activate the virtual environment
-      command: source /path/to/venv/bin/activate
-
-    - name: Install Docker Module for Python in the virtual environment
+    - name: Install Docker Module for Python
       pip:
-       name: docker
+      name: docker
        state: present
-       executable: /path/to/venv/bin/python
+       executable: /usr/bin/python3.9
+       extra_args: "--ignore-installed"
+
 
     
     # - name: Install Docker Module for Python
